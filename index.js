@@ -2,11 +2,6 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const port = process.env.PORT || 5000
-
-app.get("/", function(req, res) {
-  res.send("Hello world!!!")
-})
 
 io.on('connection', socket => {
   const { id } = socket.client
@@ -16,5 +11,5 @@ io.on('connection', socket => {
     io.emit('chat message', { nickname, msg})
   })
 })
-
-server.listen(port, () => console.log(`Listen on *: ${port}`))
+const PORT = process.env.PORT || 5000
+server.listen(PORT, () => console.log(`Listen on *: ${PORT}`))
